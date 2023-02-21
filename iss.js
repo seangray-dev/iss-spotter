@@ -24,7 +24,7 @@ const fetchMyIP = function (cb) {
   });
 };
 
-const fetchCoordsByIp = function (ip, cb) {
+const fetchCoordsByIP = function (ip, cb) {
   const API = `http://ipwho.is/${ip}`;
 
   request(API, (error, response, body) => {
@@ -66,4 +66,26 @@ const fetchISSFlyOverTimes = function (coords, cb) {
   });
 };
 
-module.exports = { fetchMyIP, fetchCoordsByIp, fetchISSFlyOverTimes };
+const nextISSTimesForMyLocation = function (cb) {
+  fetchMyIP((error, ip) => {
+    if (error) {
+      return cb(error, null);
+    }
+
+    fetchCoordsByIP(ip, (error, loc) => {
+      if (error) {
+        return cb(error, null);
+      }
+
+      fetchISSFlyOverTimes(loc, (error, nextPasses) => {
+        if (error) {
+          return cb(error, null);
+        }
+
+        cb(null, nextPasses);
+      });
+    });
+  });
+};
+
+module.exports = { nextISSTimesForMyLocation };
