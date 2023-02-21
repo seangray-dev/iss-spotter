@@ -2,7 +2,7 @@ const request = require("request");
 
 const fetchMyIP = function (cb) {
   const API = "https://api.ipify.org?format=json";
-  
+
   request(API, (error, response, body) => {
     if (error) {
       cb(error, null);
@@ -24,4 +24,21 @@ const fetchMyIP = function (cb) {
   });
 };
 
-module.exports = { fetchMyIP };
+const fetchCoordsByIp = function (ip, cb) {
+  const API = `http://ipwho.is/${ip}`;
+
+  request(API, (error, response, body) => {
+    if (error) {
+      cb(error, null);
+      return;
+    }
+
+    const parsedBody = JSON.parse(body);
+
+    const { latitude, longitude } = parsedBody;
+
+    cb(null, { latitude, longitude });
+  });
+};
+
+module.exports = { fetchMyIP, fetchCoordsByIp };
