@@ -1,5 +1,6 @@
 const { nextISSTimesForMyLocation } = require("./iss_promised");
 
+// print ISS flyover times to console
 const printPassTimes = function (passTimes) {
   for (const pass of passTimes) {
     const dateTime = new Date(0);
