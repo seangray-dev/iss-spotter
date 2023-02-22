@@ -12,9 +12,17 @@ The application is designed to run on the command line and is implemented in Jav
 
 ## Prerequisites
 
-To run this tool, you will need to have Node.js installed on your machine. You can download [Node.js](https://nodejs.org/).
+To run this tool, you will need to have [Node.js](https://nodejs.org/) installed on your machine.
 
 ## Installation
+
+Clone this repository using:
+
+```
+git clone https://github.com/seangray-dev/iss-spotter.git
+
+cd iss-spotter
+```
 
 To install the required dependencies, run the following command in your terminal:
 
